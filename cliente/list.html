@@ -8,7 +8,8 @@
 <body>
 
 	<div class="col-md-10">
-		<a href="#" class="btn btn-primary">Create nuevo API</a>
+		<br>
+		<a href="/formulario.html" class="btn btn-primary">Create nuevo API</a>
 		<div class="container">
 		  <h2>List API</h2>
 		  <p>List of API with Golang</p>            
@@ -21,21 +22,42 @@
 				<th colspan="2">Action</th>
 		      </tr>
 		    </thead>
-		    <tbody>
-		      <tr>
-		        <td>John</td>
-		        <td>Doe</td>
-		        <td>john@example.com</td>
-		        <td>
-		        	<a href="#" class="btn btn-success">edit</a>
-		        	<a href="#" class="btn btn-danger">delete</a>
-		        </td>
-		      </tr>
+		    <tbody id="lista_post" >
+		    
 		    </tbody>
 		  </table>
 		</div>
 	</div>
 
 	<script src="public/jquery.min.js"></script>
+	<script>
+		var array_tr = "";
+		$.ajax({
+			url: "http://localhost:9000/api/notes",
+			type: 'GET',
+			success: function (response) {
+		        $.each(response, function(index) {
+			       // console.log(response[index]["title"]);
+
+			        array_tr += `<tr> 
+			        				<td> ${response[index]["title"]} </td>
+			        				<td> ${response[index]["description"]} </td>
+			        				<td> ${response[index]["createdon"]} </td>
+			        				<td> 
+			        					<a href="" class="btn btn-warning">Editar</a> 
+			        					<a href="" class="btn btn-danger">Eliminar</a> 
+			        				</td>
+			        			</tr>`;
+		        });
+		        $("#lista_post").html(array_tr);
+		        
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	           console.log(textStatus, errorThrown);
+	           console.log(dates);
+	           console.log("llega aqui");
+	        }
+		})
+	</script>
 </body>
 </html>

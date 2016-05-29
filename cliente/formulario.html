@@ -26,10 +26,36 @@
 							class="form-control"></textarea>
 			</div>
 
-			<input type="submit" class="pull-right btn btn-primary">
+			<input type="submit" class="pull-right btn btn-primary" id="mandar_datos">
 
 		</form>
 	</div>
 	<script src="public/jquery.min.js"></script>
+	<script>
+		function Post(title, description){
+			this.title = title;
+			this.description = description;
+		}
+
+		$("#mandar_datos").click(function(e){
+			e.preventDefault();
+			var dates = new Post($("#title").val(),$("#description").val());
+			$.ajax({
+		        url: "http://localhost:9000/api/notes",
+		        type: 'post',
+		        contentType: "application/json; charset=utf-8",
+		        dataType: 'json',
+		        data: JSON.stringify(dates),
+		        success: function (response) {
+		           window.location="http://localhost:9000/list.html";
+		        },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		           console.log(textStatus, errorThrown);
+		           console.log(dates);
+		           console.log("llega aqui");
+		        }
+    		}); // fin de ajax
+		});
+	</script>
 </body>
 </html>

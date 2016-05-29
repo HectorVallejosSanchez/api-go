@@ -111,9 +111,9 @@ func main() {
 	r.HandleFunc("/api/notes", PostNoteHandler).Methods("POST")
 	r.HandleFunc("/api/notes/{id}", PutNoteHandler).Methods("PUT")
 	r.HandleFunc("/api/notes/{id}", DeleteNoteHandler).Methods("DELETE")
-	r.PathPrefix("/cliente/").Handler(http.StripPrefix("/cliente/", http.FileServer(http.Dir("./cliente/"))))
+	r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./cliente/"))))
 	server := &http.Server{
-		Addr:    ":8000",
+		Addr:    ":9000",
 		Handler: r,
 	}
 	log.Println("Listening...")
