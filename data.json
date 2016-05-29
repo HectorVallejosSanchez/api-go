@@ -1,0 +1,35 @@
+[
+	{
+		"title":"cantando en el parque",
+		"description":"prbando golang"
+	},
+	{
+		"title":"estoy mal del estomago",
+		"description":"este es una api"
+	},
+	{
+		"title":"usuario del mal",
+		"description":"programando ando"
+	},
+	{
+		"title":"sufriendo con golang",
+		"description":"contando gophers"
+	},
+	{
+		"title":"aceptando varios parametros",
+		"description": "golang"
+	},
+	{
+		"title":"probando la api desde un cliente",
+		"description":"rumbo a canada"
+	},
+	{
+		"title":"xD hola mundo",
+		"description": "cascadas "
+	},
+	{
+		"title":"despues tratare de parsear este documento",
+		"description":"tratando de manejar golang"
+	}
+
+]
