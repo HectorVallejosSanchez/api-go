@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	//"html/template"
 	"log"
 	"net/http"
 	"strconv"
@@ -97,20 +97,18 @@ func DeleteNoteHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func funcCreate(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "sdasdasd")
-}
-
 //Entry point of the program
 func main() {
 	r := mux.NewRouter().StrictSlash(false)
 	//r.Handle("/", http.FileServer(http.Dir("./cliente/")))
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./cliente/")))
+	//r.PathPrefix("/").Handler(http.FileServer(http.Dir("./cliente/")))
+	//http.Handle("/", new(MyHandler))
+	fs := http.FileServer(http.Dir("cliente"))
+	r.Handle("./cliente/", fs)
 	r.HandleFunc("/api/notes", GetNoteHandler).Methods("GET")
 	r.HandleFunc("/api/notes", PostNoteHandler).Methods("POST")
 	r.HandleFunc("/api/notes/{id}", PutNoteHandler).Methods("PUT")
 	r.HandleFunc("/api/notes/{id}", DeleteNoteHandler).Methods("DELETE")
-	r.HandleFunc("/hello", funcCreate).Methods("GET")
 
 	server := &http.Server{
 		Addr:    ":9000",
@@ -119,3 +117,33 @@ func main() {
 	log.Println("Listening...")
 	server.ListenAndServe()
 }
+
+/*
+type MyHandler struct {
+	http.Handler
+}
+
+func (this *MyHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	path := "cliente/" + req.URL.Path
+	data, err := ioutil.ReadFile(string(path))
+
+	if err == nil {
+		var contentType string
+		if strings.HasSuffix(path, ".css") {
+			contentType = "text/css"
+		} else if strings.HasSuffix(path, ".html") {
+			contentType = "text/html"
+		} else if strings.HasSuffix(path, ".js") {
+			contentType = "application/javascript"
+		} else {
+			contentType = "text/plain"
+		}
+
+		w.Header().Add("Content Type", contentType)
+		w.Write(data)
+	} else {
+		w.WriteHeader(404)
+		w.Write([]byte("404 - " + http.StatusText(404)))
+	}
+}
+*/
