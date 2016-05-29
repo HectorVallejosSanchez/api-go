@@ -105,7 +105,7 @@ func funcCreate(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter().StrictSlash(false)
 	//r.Handle("/", http.FileServer(http.Dir("./cliente/")))
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./cliente/")))
+	//r.PathPrefix("/").Handler(http.FileServer(http.Dir("./cliente/")))
 	r.HandleFunc("/api/notes", GetNoteHandler).Methods("GET")
 	r.HandleFunc("/api/notes", PostNoteHandler).Methods("POST")
 	r.HandleFunc("/api/notes/{id}", PutNoteHandler).Methods("PUT")
